@@ -12,6 +12,11 @@ export default function Projects() {
     const [projects, setProjects] = useState<Array<Project>>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | undefined>(undefined);
+
+    const [ filteredResults , setFilteredResults] = useState<Array<Project>>([]);
+
+    const inputRef = React.useRef<null | HTMLInputElement>(null);
+
     const selectedProject = useAppSelector(projectsSelector);
     const dispatch = useAppDispatch();
 
@@ -25,23 +30,20 @@ export default function Projects() {
       setLoading(selectedProject.loading);
       setError(selectedProject.error);
       setProjects(selectedProject.projects);
-      setFilteredResults(projects)
+      setFilteredResults(selectedProject.projects)
     }, [selectedProject]);
     
     function handleGetProjects() {
       dispatch(getProjects());
     }
-    const handleSortedProjects = () => setProjects([...projects].sort((a, b) => new Date(a.end).getTime() - new Date(b.end).getTime()));
-    const handleSortedProjects2 = () => setProjects([...projects].sort((a, b) => new Date(b.end).getTime() - new Date(a.end).getTime()));
 
-    const [ searchInput, setSearchInput ] = useState<string>("");
-    const [ filteredResults , setFilteredResults] = useState<Array<Project>>([]);
 
-    const searchItems = (searchValue: string) => {
-        setSearchInput(searchValue)
-        if (searchInput !== '') {
+    
+    const searchItems = () => {
+       const searchInput2 = inputRef.current ? inputRef.current.value : ""
+        if (searchInput2 !== "") {
             const filteredData = projects.filter((item) => {
-                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+                return Object.values(item).join("").toLowerCase().includes(searchInput2.toLowerCase())
             })
             setFilteredResults(filteredData)
         }
@@ -49,6 +51,11 @@ export default function Projects() {
             setFilteredResults(projects)
         }
     }
+
+
+    const handleSortedProjects = () => setProjects([...filteredResults].sort((a, b) => new Date(a.end).getTime() - new Date(b.end).getTime()));
+    const handleSortedProjects2 = () => setProjects([...filteredResults].sort((a, b) => new Date(b.end).getTime() - new Date(a.end).getTime()));
+
 
     return (
         <>
@@ -69,8 +76,8 @@ export default function Projects() {
                             type="search"
                             placeholder="Search"
                             aria-label="Search"
-                            onMouseOut={()=> setFilteredResults(projects)}
-                            onChange={(e) => searchItems(e.target.value)}
+                            onChange={searchItems}
+                            ref={inputRef}
                         />
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 ml-2"
