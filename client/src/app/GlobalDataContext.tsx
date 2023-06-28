@@ -1,11 +1,10 @@
-
-//import React, { useContext, useMemo, useState } from "react";
+//  import React, { useContext, useMemo, useState } from "react";
 
 export interface Project {
-    id?: number ,
-    name?: string ,
-    hours?: number,
-    end: Date
+  id?: number
+  name?: string
+  hours?: number
+  end: Date
 }
 
 /* 
