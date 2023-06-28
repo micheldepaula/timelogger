@@ -1,18 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IProject } from "../../utils";
 import Item from "./Item";
 
-import { useAppDispatch } from "../../app/hooks";
-import { addProject } from "./../redux/projectSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { addProject, sortedProjectsAsc, projectsSelector, getProjects } from "./../redux/projectSlice";
 
 
-type ItemProps = {
-    projects: IProject[]
-    handleSortedProjects: () => void,
-    handleSortedProjects2: () => void,
-}
-
-export default function Table(props:ItemProps) {
+export default function Table() {
     const [project, setProject] = useState<IProject>()
     const [up, setUp] = useState<boolean>(true)
     const dispatch = useAppDispatch();
@@ -24,9 +18,28 @@ export default function Table(props:ItemProps) {
                 end: new Date(project.end)
             })); 
         }
-      
-    
    }
+   const globalData = useAppSelector(projectsSelector);
+
+   useEffect(() => {
+       dispatch(getProjects());
+     }, []);
+     
+
+    const orderProjectsByEndDate = () => {
+        
+        if(up){
+            dispatch(sortedProjectsAsc(globalData.projects));
+            setUp(!up)
+        }else{
+            //dispatch(sortedProjectsDesc2(globalData.projects));
+            dispatch({type: "projects/sortedProjectsDesc"});
+            setUp(!up)
+        }
+    }
+
+
+      
    const IconUp = () => {  
     return (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -50,14 +63,8 @@ export default function Table(props:ItemProps) {
                     <th className="border px-4 py-2 w-12">#</th>
                     <th className="border px-4 py-2">Project Name</th>
                     <th className="border px-4 py-2">Hours</th>
-                    <th 
-                        className="flex justify-between border px-4 py-2 cursor-pointer " 
-                        onClick={() => {up ? props.handleSortedProjects() : 
-                                             props.handleSortedProjects2()
-                                             setUp(!up)}} 
-                                             >
+                    <th className="flex justify-between border px-4 py-2 cursor-pointer " onClick={orderProjectsByEndDate} >
                             DeadLine {up ? <IconUp/>: <IconDown/>}
-
                     </th>
                 </tr>
             </thead>
@@ -99,7 +106,7 @@ export default function Table(props:ItemProps) {
                 onClick={addEntry}>Add Entry</button>
             </td>
         </tr>
-        {props.projects.map((project) => <Item key={project.id} project={project} />)}
+        {globalData.projects.map((project) => <Item key={project.id} project={project} />)}
             </tbody>
         </table>
     );

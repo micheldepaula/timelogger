@@ -52,11 +52,6 @@ export default function Projects() {
         }
     }
 
-
-    const handleSortedProjects = () => setProjects([...filteredResults].sort((a, b) => new Date(a.end).getTime() - new Date(b.end).getTime()));
-    const handleSortedProjects2 = () => setProjects([...filteredResults].sort((a, b) => new Date(b.end).getTime() - new Date(a.end).getTime()));
-
-
     return (
         <>
             <div className="flex items-center my-6">
@@ -91,7 +86,7 @@ export default function Projects() {
             {loading && <div>Loading...</div>}
             {error && <div>Error: {error}</div>}
             {filteredResults != undefined && 
-            <Table projects={filteredResults} handleSortedProjects={handleSortedProjects} handleSortedProjects2={handleSortedProjects2}/>
+            <Table/>
             }
         </>
     );
