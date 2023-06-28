@@ -36,21 +36,15 @@ export const editHoursProject = createAsyncThunk('projects/editProjects', (proje
   return res
 })
 
-export const sortedProjectsAsc = createAsyncThunk(
-  'projects/sortedProjectsAsc',
-  (projects: Array<Project>) => {
-    const res = [...projects].sort((a, b) => new Date(b.end).getTime() - new Date(a.end).getTime())
-    return res
-  },
-)
+export const sortedProjectsAsc = createAsyncThunk('projects/sortedProjectsAsc', (projects: Array<Project>) => {
+  const res = [...projects].sort((a, b) => new Date(b.end).getTime() - new Date(a.end).getTime())
+  return res
+})
 
-export const sortedProjectsDesc2 = createAsyncThunk(
-  'projects/sortedProjectsDesc2',
-  (projects: Array<Project>) => {
-    const res = [...projects].sort((a, b) => new Date(a.end).getTime() - new Date(b.end).getTime())
-    return res
-  },
-)
+export const sortedProjectsDesc2 = createAsyncThunk('projects/sortedProjectsDesc2', (projects: Array<Project>) => {
+  const res = [...projects].sort((a, b) => new Date(a.end).getTime() - new Date(b.end).getTime())
+  return res
+})
 
 const ProjectSlice = createSlice({
   name: 'projects',
@@ -107,13 +101,10 @@ const ProjectSlice = createSlice({
       state.loading = false
     })
 
-    builder.addCase(
-      sortedProjectsDesc2.fulfilled,
-      (state, action: PayloadAction<Array<Project>>) => {
-        state.loading = false
-        state.projects = action.payload
-      },
-    )
+    builder.addCase(sortedProjectsDesc2.fulfilled, (state, action: PayloadAction<Array<Project>>) => {
+      state.loading = false
+      state.projects = action.payload
+    })
 
     builder.addCase(sortedProjectsDesc2.rejected, (state, action) => {
       state.loading = false
@@ -122,9 +113,7 @@ const ProjectSlice = createSlice({
   },
   reducers: {
     sortedProjectsDesc: (state) => {
-      state.projects = state.projects.sort(
-        (a, b) => new Date(a.end).getTime() - new Date(b.end).getTime(),
-      )
+      state.projects = state.projects.sort((a, b) => new Date(a.end).getTime() - new Date(b.end).getTime())
     },
   },
 })
