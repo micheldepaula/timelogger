@@ -1,17 +1,18 @@
 import React, { useRef } from 'react'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 
-import { addProject } from './../redux/projectSlice'
+import { addProject, projectsSelector } from './../redux/projectSlice'
 import Table from '../components/Table'
 
 export default function Projects() {
   const inputNameRef = useRef<HTMLInputElement>(null)
   const inputHoursRef = useRef<HTMLInputElement>(null)
   const inputEndRef = useRef<HTMLInputElement>(null)
+  const globalData = useAppSelector(projectsSelector)
 
   const dispatch = useAppDispatch()
 
-  const addEntry = () => {
+  const handleAddEntry = () => {
     if (inputNameRef.current && inputHoursRef.current && inputEndRef.current) {
       dispatch(
         addProject({
@@ -46,7 +47,10 @@ export default function Projects() {
           placeholder='DeadLine'
           aria-label='DeadLine'
         />
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={addEntry}>
+        <button
+          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+          onClick={handleAddEntry}
+        >
           Add Entry
         </button>
       </div>
@@ -66,6 +70,8 @@ export default function Projects() {
           </form>
         </div>
       </div>
+      {globalData.loading && <div>Loading...</div>}
+      {globalData.error && <div>Error: {globalData.error}</div>}
       <Table />
     </>
   )
