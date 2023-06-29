@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../app/hooks'
 import React, { useState } from 'react'
 import { IProject } from '../../utils'
-import { editHoursProject } from '../redux/projectSlice'
+import { editProject } from '../redux/projectSlice'
 
 type ItemProps = {
   project: IProject
@@ -16,7 +16,7 @@ export default function Item(props: ItemProps) {
     setEdit(false)
     if (props.project.end) {
       dispatch(
-        editHoursProject({
+        editProject({
           id: props.project.id,
           name: name,
           hours: Number(hours),

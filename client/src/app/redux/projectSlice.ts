@@ -31,7 +31,7 @@ export const addProject = createAsyncThunk('projects/addProjects', (project: Pro
   return res
 })
 
-export const editHoursProject = createAsyncThunk('projects/editProjects', (project: Project) => {
+export const editProject = createAsyncThunk('projects/editProjects', (project: Project) => {
   const res = putProject(project).then((data) => data)
   return res
 })
@@ -73,14 +73,14 @@ const ProjectSlice = createSlice({
       state.loading = false
       state.error = action.error.message
     })
-    builder.addCase(editHoursProject.pending, (state) => {
+    builder.addCase(editProject.pending, (state) => {
       state.loading = true
     })
-    builder.addCase(editHoursProject.fulfilled, (state, action: PayloadAction<Project>) => {
+    builder.addCase(editProject.fulfilled, (state, action: PayloadAction<Project>) => {
       state.loading = false
       state.project = action.payload
     })
-    builder.addCase(editHoursProject.rejected, (state, action) => {
+    builder.addCase(editProject.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message
     })
