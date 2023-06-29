@@ -1,3 +1,3 @@
-import Wrapper from './Wrapper/Wrapper'
+import Wrapper from './Wrapper/Wrapper';
 
-export { Wrapper }
+export { Wrapper };

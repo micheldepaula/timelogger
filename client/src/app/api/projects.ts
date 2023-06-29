@@ -1,10 +1,10 @@
-import { Project } from '../slice/projectSlice'
+import { Project } from '../slice/projectSlice';
 
-const BASE_URL = 'http://localhost:3001/api'
+const BASE_URL = 'http://localhost:3001/api';
 
 export async function getAll() {
-  const response = await fetch(`${BASE_URL}/projects`)
-  return response.json()
+  const response = await fetch(`${BASE_URL}/projects`);
+  return response.json();
 }
 
 export async function postProject(data: Project) {
@@ -16,9 +16,9 @@ export async function postProject(data: Project) {
       hours: data.hours,
       end: data.end,
     }),
-  }
-  const response = await fetch(`${BASE_URL}/projects`, requestOptions)
-  return response.json()
+  };
+  const response = await fetch(`${BASE_URL}/projects`, requestOptions);
+  return response.json();
 }
 
 export async function putProject(data: Project) {
@@ -31,7 +31,7 @@ export async function putProject(data: Project) {
       hours: data.hours,
       end: data.end,
     }),
-  }
-  const response = await fetch(`${BASE_URL}/projects`, requestOptions)
-  return response.json()
+  };
+  const response = await fetch(`${BASE_URL}/projects`, requestOptions);
+  return response.json();
 }

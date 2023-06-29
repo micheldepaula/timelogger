@@ -1,19 +1,19 @@
-import React, { useEffect, useRef } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { addProject, getProjects, projectsSelector } from '../../slice/projectSlice'
-import ProjectsList from './components/ProjectsList'
+import React, { useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { addProject, getProjects, projectsSelector } from '../../slice/projectSlice';
+import ProjectsList from './components/ProjectsList';
 
 const Projects: React.FC = () => {
-  const inputNameRef = useRef<HTMLInputElement>(null)
-  const inputHoursRef = useRef<HTMLInputElement>(null)
-  const inputEndRef = useRef<HTMLInputElement>(null)
-  const { projects, loading, error } = useAppSelector(projectsSelector)
+  const inputNameRef = useRef<HTMLInputElement>(null);
+  const inputHoursRef = useRef<HTMLInputElement>(null);
+  const inputEndRef = useRef<HTMLInputElement>(null);
+  const { projects, loading, error } = useAppSelector(projectsSelector);
 
   useEffect(() => {
-    dispatch(getProjects())
-  }, [])
+    dispatch(getProjects());
+  }, []);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleAddEntry = () => {
     if (inputNameRef.current && inputHoursRef.current && inputEndRef.current) {
@@ -23,12 +23,12 @@ const Projects: React.FC = () => {
           hours: Number(inputHoursRef.current.value),
           end: new Date(inputEndRef.current.value),
         }),
-      )
-      inputNameRef.current.value = ''
-      inputHoursRef.current.value = ''
-      inputEndRef.current.value = ''
+      );
+      inputNameRef.current.value = '';
+      inputHoursRef.current.value = '';
+      inputEndRef.current.value = '';
     }
-  }
+  };
 
   const AddEntry = () => {
     return (
@@ -67,8 +67,8 @@ const Projects: React.FC = () => {
           Add Entry
         </button>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div data-testid='projects-view'>
@@ -97,7 +97,7 @@ const Projects: React.FC = () => {
       {error && <div data-testid='error'>Error: {error}</div>}
       <ProjectsList projects={projects} />
     </div>
-  )
-}
+  );
+};
 
-export default Projects
+export default Projects;

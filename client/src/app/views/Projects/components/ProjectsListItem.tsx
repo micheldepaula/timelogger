@@ -1,19 +1,19 @@
-import { useAppDispatch } from '../../../hooks'
-import React, { useState } from 'react'
-import { IProject } from '../../../../utils'
-import { editProject } from '../../../slice/projectSlice'
+import { useAppDispatch } from '../../../hooks';
+import React, { useState } from 'react';
+import { IProject } from '../../../../utils';
+import { editProject } from '../../../slice/projectSlice';
 
 type ProjectsListItemProps = {
-  project: IProject
-}
+  project: IProject;
+};
 
 const ProjectsListItem: React.FC<ProjectsListItemProps> = ({ project }) => {
-  const [edit, setEdit] = useState<boolean>(false)
-  const [hours, setHours] = useState(project.hours)
-  const [name, setName] = useState(project.name)
-  const dispatch = useAppDispatch()
+  const [edit, setEdit] = useState<boolean>(false);
+  const [hours, setHours] = useState(project.hours);
+  const [name, setName] = useState(project.name);
+  const dispatch = useAppDispatch();
   const handleEditProject = () => {
-    setEdit(false)
+    setEdit(false);
     if (project.end) {
       dispatch(
         editProject({
@@ -22,9 +22,9 @@ const ProjectsListItem: React.FC<ProjectsListItemProps> = ({ project }) => {
           hours: Number(hours),
           end: new Date(project.end.toString()),
         }),
-      )
+      );
     }
-  }
+  };
   const EditableInputName = () => {
     return (
       <td className='border px-4 py-2'>
@@ -37,8 +37,8 @@ const ProjectsListItem: React.FC<ProjectsListItemProps> = ({ project }) => {
           onChange={(e) => setName(e.target.value.toString())}
         />
       </td>
-    )
-  }
+    );
+  };
 
   const EditableInputHours = () => {
     return (
@@ -52,8 +52,8 @@ const ProjectsListItem: React.FC<ProjectsListItemProps> = ({ project }) => {
           onChange={(e) => setHours(e.target.value.toString())}
         />
       </td>
-    )
-  }
+    );
+  };
 
   const EditButtons = () => {
     return (
@@ -73,8 +73,8 @@ const ProjectsListItem: React.FC<ProjectsListItemProps> = ({ project }) => {
           cancel
         </button>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <tr data-testid={`projects-list-item-${project.id}`}>
@@ -95,6 +95,6 @@ const ProjectsListItem: React.FC<ProjectsListItemProps> = ({ project }) => {
         )}
       </td>
     </tr>
-  )
-}
-export default ProjectsListItem
+  );
+};
+export default ProjectsListItem;

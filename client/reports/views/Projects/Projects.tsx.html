@@ -148,7 +148,25 @@
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,6 +231,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,22 +258,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useRef } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { addProject, getProjects, projectsSelector } from '../../slice/projectSlice'
-import ProjectsList from './components/ProjectsList'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { addProject, getProjects, projectsSelector } from '../../slice/projectSlice';
+import ProjectsList from './components/ProjectsList';
 &nbsp;
 const Projects: React.FC = () =&gt; {
-  const inputNameRef = useRef&lt;HTMLInputElement&gt;(null)
-  const inputHoursRef = useRef&lt;HTMLInputElement&gt;(null)
-  const inputEndRef = useRef&lt;HTMLInputElement&gt;(null)
-  const { projects, loading, error } = useAppSelector(projectsSelector)
+  const inputNameRef = useRef&lt;HTMLInputElement&gt;(null);
+  const inputHoursRef = useRef&lt;HTMLInputElement&gt;(null);
+  const inputEndRef = useRef&lt;HTMLInputElement&gt;(null);
+  const { projects, loading, error } = useAppSelector(projectsSelector);
 &nbsp;
   useEffect(() =&gt; {
-    dispatch(getProjects())
-  }, [])
+    dispatch(getProjects());
+  }, []);
 &nbsp;
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 &nbsp;
   const handleAddEntry = () =&gt; {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (inputNameRef.current &amp;&amp; inputHoursRef.current &amp;&amp; inputEndRef.current) {
@@ -258,12 +294,12 @@ const Projects: React.FC = () =&gt; {
           hours: Number(inputHoursRef.current.value),
           end: new Date(inputEndRef.current.value),
         }),
-      )
-      inputNameRef.current.value = ''
-      inputHoursRef.current.value = ''
-      inputEndRef.current.value = ''
+      );
+      inputNameRef.current.value = '';
+      inputHoursRef.current.value = '';
+      inputEndRef.current.value = '';
     }
-  }
+  };
 &nbsp;
   const AddEntry = () =&gt; {
     return (
@@ -277,7 +313,14 @@ const Projects: React.FC = () =&gt; {
           data-testid='project-name-input'
         /&gt;
 &nbsp;
-        &lt;input className='border  py-2 px-4' type='number' ref={inputHoursRef} placeholder='Hours' aria-label='Hours' data-testid='hours-input' /&gt;
+        &lt;input
+          className='border  py-2 px-4'
+          type='number'
+          ref={inputHoursRef}
+          placeholder='Hours'
+          aria-label='Hours'
+          data-testid='hours-input'
+        /&gt;
 &nbsp;
         &lt;input
           className='border  py-2 px-4'
@@ -295,8 +338,8 @@ const Projects: React.FC = () =&gt; {
           Add Entry
         &lt;/button&gt;
       &lt;/div&gt;
-    )
-  }
+    );
+  };
 &nbsp;
   return (
     &lt;div data-testid='projects-view'&gt;
@@ -304,8 +347,18 @@ const Projects: React.FC = () =&gt; {
         &lt;AddEntry /&gt;
         &lt;div className='w-1/2 flex justify-end'&gt;
           &lt;form&gt;
-            &lt;input className='border rounded-full py-2 px-4' type='search' placeholder='Search' aria-label='Search' data-testid='search-input' /&gt;
-            &lt;button className='bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 ml-2' type='submit' data-testid='search-button'&gt;
+            &lt;input
+              className='border rounded-full py-2 px-4'
+              type='search'
+              placeholder='Search'
+              aria-label='Search'
+              data-testid='search-input'
+            /&gt;
+            &lt;button
+              className='bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 ml-2'
+              type='submit'
+              data-testid='search-button'
+            &gt;
               Search
             &lt;/button&gt;
           &lt;/form&gt;
@@ -315,17 +368,18 @@ const Projects: React.FC = () =&gt; {
       {error &amp;&amp; &lt;div data-testid='error'&gt;Error: {error}&lt;/div&gt;}
       &lt;ProjectsList projects={projects} /&gt;
     &lt;/div&gt;
-  )
-}
+  );
+};
 &nbsp;
-export default Projects</pre></td></tr></table></pre>
+export default Projects;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-29T11:08:03.998Z
+                at 2023-06-29T13:16:17.017Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

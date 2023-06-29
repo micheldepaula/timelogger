@@ -1,6 +1,6 @@
-import * as React from 'react'
-import Projects from './views/Projects/Projects'
-import './style.css'
+import * as React from 'react';
+import Projects from './views/Projects/Projects';
+import './style.css';
 
 export default function App() {
   return (
@@ -19,5 +19,5 @@ export default function App() {
         </div>
       </main>
     </>
-  )
+  );
 }
