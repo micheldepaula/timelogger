@@ -1,26 +1,26 @@
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch } from '../../../hooks'
 import React, { useState } from 'react'
-import { IProject } from '../../utils'
-import { editProject } from '../redux/projectSlice'
+import { IProject } from '../../../../utils'
+import { editProject } from '../../../slice/projectSlice'
 
-type ItemProps = {
+type ProjectsListItemProps = {
   project: IProject
 }
 
-export default function Item(props: ItemProps) {
+const ProjectsListItem: React.FC<ProjectsListItemProps> = ({ project }) => {
   const [edit, setEdit] = useState<boolean>(false)
-  const [hours, setHours] = useState(props.project.hours)
-  const [name, setName] = useState(props.project.name)
+  const [hours, setHours] = useState(project.hours)
+  const [name, setName] = useState(project.name)
   const dispatch = useAppDispatch()
   const handleEditProject = () => {
     setEdit(false)
-    if (props.project.end) {
+    if (project.end) {
       dispatch(
         editProject({
-          id: props.project.id,
+          id: project.id,
           name: name,
           hours: Number(hours),
-          end: new Date(props.project.end.toString()),
+          end: new Date(project.end.toString()),
         }),
       )
     }
@@ -61,12 +61,14 @@ export default function Item(props: ItemProps) {
         <button
           className='bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 ml-2'
           onClick={handleEditProject}
+          data-testid={`projects-list-item-${project.id}-button-edit`}
         >
           Save
         </button>
         <button
           className='bg-red-500 hover:bg-red-700 text-white rounded-full py-2 px-4 ml-2'
           onClick={() => setEdit(false)}
+          data-testid={`projects-list-item-${project.id}-button-cancel-edit`}
         >
           cancel
         </button>
@@ -75,12 +77,12 @@ export default function Item(props: ItemProps) {
   }
 
   return (
-    <tr>
-      <td className='border px-4 py-2 w-12'>{props.project.id}</td>
+    <tr data-testid={`projects-list-item-${project.id}`}>
+      <td className='border px-4 py-2 w-12'>{project.id}</td>
       {!edit ? <td className='border px-4 py-2'>{name}</td> : <EditableInputName />}
       {!edit ? <td className='border px-4 py-2'>{hours}</td> : <EditableInputHours />}
       <td className='flex justify-between border px-4 py-2 '>
-        {props.project.end && new Date(props.project.end).toISOString().split('T')[0]}
+        {project.end && new Date(project.end).toISOString().split('T')[0]}
         {!edit ? (
           <button
             className='bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 ml-2'
@@ -95,3 +97,4 @@ export default function Item(props: ItemProps) {
     </tr>
   )
 }
+export default ProjectsListItem

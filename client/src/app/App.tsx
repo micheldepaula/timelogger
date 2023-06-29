@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Projects from './views/Projects'
+import Projects from './views/Projects/Projects'
 import './style.css'
 
 export default function App() {

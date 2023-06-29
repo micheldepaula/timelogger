@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../../app/store'
-import { getAll, postProject, putProject } from './../api/projects'
+import { RootState } from '../store'
+import { getAll, postProject, putProject } from '../api/projects'
 
 export interface Project {
   id?: number
@@ -12,8 +12,8 @@ export interface Project {
 export interface ProjectState {
   loading: boolean
   projects: Array<Project>
-  project: Project | undefined
-  error: string | undefined
+  project?: Project
+  error?: string
 }
 const initialState: ProjectState = {
   loading: false,

@@ -1,14 +1,17 @@
-import React, { useRef } from 'react'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import React, { useEffect, useRef } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { addProject, getProjects, projectsSelector } from '../../slice/projectSlice'
+import ProjectsList from './components/ProjectsList'
 
-import { addProject, projectsSelector } from './../redux/projectSlice'
-import Table from '../components/Table'
-
-export default function Projects() {
+const Projects: React.FC = () => {
   const inputNameRef = useRef<HTMLInputElement>(null)
   const inputHoursRef = useRef<HTMLInputElement>(null)
   const inputEndRef = useRef<HTMLInputElement>(null)
-  const globalData = useAppSelector(projectsSelector)
+  const { projects, loading, error } = useAppSelector(projectsSelector)
+
+  useEffect(() => {
+    dispatch(getProjects())
+  }, [])
 
   const dispatch = useAppDispatch()
 
@@ -36,9 +39,17 @@ export default function Projects() {
           ref={inputNameRef}
           placeholder='Project Name'
           aria-label='Project Name'
+          data-testid='project-name-input'
         />
 
-        <input className='border  py-2 px-4' type='number' ref={inputHoursRef} placeholder='Hours' aria-label='Hours' />
+        <input
+          className='border  py-2 px-4'
+          type='number'
+          ref={inputHoursRef}
+          placeholder='Hours'
+          aria-label='Hours'
+          data-testid='hours-input'
+        />
 
         <input
           className='border  py-2 px-4'
@@ -46,10 +57,12 @@ export default function Projects() {
           ref={inputEndRef}
           placeholder='DeadLine'
           aria-label='DeadLine'
+          data-testid='deadline-input'
         />
         <button
           className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
           onClick={handleAddEntry}
+          data-testid='add-entry-button'
         >
           Add Entry
         </button>
@@ -58,21 +71,33 @@ export default function Projects() {
   }
 
   return (
-    <>
+    <div data-testid='projects-view'>
       <div className='flex items-center my-6'>
         <AddEntry />
         <div className='w-1/2 flex justify-end'>
           <form>
-            <input className='border rounded-full py-2 px-4' type='search' placeholder='Search' aria-label='Search' />
-            <button className='bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 ml-2' type='submit'>
+            <input
+              className='border rounded-full py-2 px-4'
+              type='search'
+              placeholder='Search'
+              aria-label='Search'
+              data-testid='search-input'
+            />
+            <button
+              className='bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 ml-2'
+              type='submit'
+              data-testid='search-button'
+            >
               Search
             </button>
           </form>
         </div>
       </div>
-      {globalData.loading && <div>Loading...</div>}
-      {globalData.error && <div>Error: {globalData.error}</div>}
-      <Table />
-    </>
+      {loading && <div data-testid='loading'>Loading...</div>}
+      {error && <div data-testid='error'>Error: {error}</div>}
+      <ProjectsList projects={projects} />
+    </div>
   )
 }
+
+export default Projects

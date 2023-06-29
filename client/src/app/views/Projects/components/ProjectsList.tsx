@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import Item from './Item'
+import React, { useState } from 'react'
+import Item from './ProjectsListItem'
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { sortedProjectsAsc, projectsSelector, getProjects } from './../redux/projectSlice'
+import { useAppDispatch } from '../../../hooks'
+import { sortedProjectsAsc, Project } from '../../../slice/projectSlice'
 
-export default function Table() {
+interface ProjectsListProps {
+  projects: Array<Project>
+  error?: string
+  loading?: string
+}
+const ProjectsList: React.FC<ProjectsListProps> = ({ projects, error, loading }) => {
   const [up, setUp] = useState<boolean>(true)
   const dispatch = useAppDispatch()
 
-  const globalData = useAppSelector(projectsSelector)
-
-  useEffect(() => {
-    dispatch(getProjects())
-  }, [])
-
   const orderProjectsByEndDate = () => {
     if (up) {
-      dispatch(sortedProjectsAsc(globalData.projects))
+      dispatch(sortedProjectsAsc(projects))
       setUp(!up)
     } else {
       dispatch({ type: 'projects/sortedProjectsDesc' })
@@ -54,7 +53,7 @@ export default function Table() {
   }
 
   return (
-    <table className='table-fixed w-full'>
+    <table className='table-fixed w-full' data-testid='projects-list-component'>
       <thead className='bg-gray-200'>
         <tr className='space'>
           <th className='border px-4 py-2 w-12'>#</th>
@@ -66,12 +65,14 @@ export default function Table() {
         </tr>
       </thead>
       <tbody>
-        {globalData.loading && <div>Loading...</div>}
-        {globalData.error && <div>Error: {globalData.error}</div>}
-        {globalData.projects.map((project) => (
+        {loading && <div>Loading...</div>}
+        {error && <div>Error: {error}</div>}
+        {projects.map((project) => (
           <Item key={project.id} project={project} />
         ))}
       </tbody>
     </table>
   )
 }
+
+export default ProjectsList

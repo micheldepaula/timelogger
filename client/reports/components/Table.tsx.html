@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">58.82% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>10/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>5/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">58.82% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>10/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -147,30 +147,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,8 +177,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,7 +195,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,17 +223,17 @@ import Item from './Item'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { sortedProjectsAsc, projectsSelector, getProjects } from './../redux/projectSlice'
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >Table(</span>) {
-  const [up, setUp] = <span class="cstat-no" title="statement not covered" >useState&lt;boolean&gt;(true)</span>
-  const dispatch = <span class="cstat-no" title="statement not covered" >useAppDispatch()</span>
+export default function Table() {
+  const [up, setUp] = useState&lt;boolean&gt;(true)
+  const dispatch = useAppDispatch()
 &nbsp;
-  const globalData = <span class="cstat-no" title="statement not covered" >useAppSelector(projectsSelector)</span>
+  const globalData = useAppSelector(projectsSelector)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    dispatch(getProjects())</span>
+  useEffect(() =&gt; {
+    dispatch(getProjects())
   }, [])
 &nbsp;
-  const orderProjectsByEndDate = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  const orderProjectsByEndDate = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    if (up) {</span>
 <span class="cstat-no" title="statement not covered" >      dispatch(sortedProjectsAsc(globalData.projects))</span>
 <span class="cstat-no" title="statement not covered" >      setUp(!up)</span>
@@ -243,8 +243,8 @@ export default function <span class="fstat-no" title="function not covered" >Tab
     }
   }
 &nbsp;
-  const IconUp = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return (</span>
+  const IconUp = () =&gt; {
+    return (
       &lt;svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
@@ -257,7 +257,7 @@ export default function <span class="fstat-no" title="function not covered" >Tab
       &lt;/svg&gt;
     )
   }
-  const IconDown = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  const IconDown = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;svg
         xmlns='http://www.w3.org/2000/svg'
@@ -272,7 +272,7 @@ export default function <span class="fstat-no" title="function not covered" >Tab
     )
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;table className='table-fixed w-full'&gt;
       &lt;thead className='bg-gray-200'&gt;
         &lt;tr className='space'&gt;
@@ -280,7 +280,7 @@ export default function <span class="fstat-no" title="function not covered" >Tab
           &lt;th className='border px-4 py-2'&gt;Project Name&lt;/th&gt;
           &lt;th className='border px-4 py-2'&gt;Hours&lt;/th&gt;
           &lt;th className='flex justify-between border px-4 py-2 cursor-pointer ' onClick={orderProjectsByEndDate}&gt;
-            DeadLine {up ? &lt;IconUp /&gt; : &lt;IconDown /&gt;}
+            DeadLine {up ? &lt;IconUp /&gt; : <span class="branch-1 cbranch-no" title="branch not covered" >&lt;IconDown /&gt;}</span>
           &lt;/th&gt;
         &lt;/tr&gt;
       &lt;/thead&gt;
@@ -301,7 +301,7 @@ export default function <span class="fstat-no" title="function not covered" >Tab
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-29T01:14:04.215Z
+                at 2023-06-29T10:06:45.140Z
             </div>
         <script src="../prettify.js"></script>
         <script>

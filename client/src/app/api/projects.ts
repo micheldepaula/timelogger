@@ -1,4 +1,4 @@
-import { Project } from '../redux/projectSlice'
+import { Project } from '../slice/projectSlice'
 
 const BASE_URL = 'http://localhost:3001/api'
 
