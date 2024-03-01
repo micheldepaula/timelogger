@@ -56,6 +56,7 @@ namespace Timelogger.Api
 					.AllowCredentials());
 			}
 
+
 			app.UseMvc();
 
 
@@ -71,13 +72,25 @@ namespace Timelogger.Api
 			var context = scope.ServiceProvider.GetService<ApiContext>();
 			var testProject1 = new Project
 			{
-				Id = 1,
-				Name = "e-conomic Interview"
-			};
+				Name = "e-conomic Interview",
+                Hours = 30,
+                End = "02-03-2023"
+            };
 
 			context.Projects.Add(testProject1);
 
 			context.SaveChanges();
-		}
+
+            var testProject2 = new Project
+            {
+                Name = "e-conomic Interview 2",
+                Hours = 30,
+				End= "02-01-2023"
+            };
+
+            context.Projects.Add(testProject2);
+
+            context.SaveChanges();
+        }
 	}
 }

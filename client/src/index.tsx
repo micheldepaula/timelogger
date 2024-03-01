@@ -1,5 +1,11 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import Application from "./app/App";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import Application from './app/App';
+import Wrapper from './app/components/Wrapper/Wrapper';
 
-ReactDOM.render(<Application />, document.getElementById("root"));
+ReactDOM.render(
+  <Wrapper>
+    <Application />
+  </Wrapper>,
+  document.getElementById('root'),
+);

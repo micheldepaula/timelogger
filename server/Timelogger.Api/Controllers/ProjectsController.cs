@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Timelogger.Entities;
 
 namespace Timelogger.Api.Controllers
 {
@@ -23,7 +27,44 @@ namespace Timelogger.Api.Controllers
 		[HttpGet]
 		public IActionResult Get()
 		{
+			
+
 			return Ok(_context.Projects);
 		}
-	}
+
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Project), StatusCodes.Status200OK)]
+		public IActionResult GetById(int id)
+        {
+            var project =  _context.Projects.Find(id);
+            return Ok(project);
+        }
+
+        // POST api/projects
+        [HttpPost]
+        public IActionResult Post([FromBody] Project project)
+        {
+            Console.WriteLine("aquiii {0} : ", project.Name);
+            _context.Projects.Add(project);
+
+            _context.SaveChanges();
+
+            return Ok(project);
+        }
+
+
+        // PUT api/projects
+        [HttpPut]
+        public IActionResult Put([FromBody] Project project)
+        {
+            Console.WriteLine("aquiii {0} : ", project.Name);
+            _context.Projects.Update(project);
+            _context.SaveChanges();
+
+            return Ok(project);
+        }
+        
+
+    }
 }
